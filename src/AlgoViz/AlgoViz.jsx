@@ -1,17 +1,19 @@
 import React from 'react';
 import './AlgoViz.css';
-
-
+import NavBar from '../NavBar/NavBar';
 const PRIMARY_COLOR = 'tomato';
-const N_ARRAY_BARS = 30;
 
 export default class AlgoViz extends React.Component {
   constructor(props) {
     super(props);
+    this.changeBarWidth = this.changeBarWidth.bind(this);
+    this.resetArray = this.resetArray.bind(this);
 
+    this.n_bars = 10
     this.state = {
       array: [],
     };
+
   }
 
   componentDidMount() {
@@ -20,13 +22,19 @@ export default class AlgoViz extends React.Component {
 
   resetArray() {
     const array = [];
-    for (let i = 0; i < N_ARRAY_BARS; i++) {
-      array.push(randomIntFromInterval(10, window.innerHeight*.75));
+
+    for (let i = 0; i < this.n_bars; i++) {
+      array.push(randomIntFromInterval(10, window.innerHeight*.9));
     }
     this.setState({array});
-    this.arrayWidth = Math.max(Math.floor((window.innerWidth*.75)/N_ARRAY_BARS)-2,1)// Left offset and margins or just do fraction 
+    this.arrayWidth = Math.max(Math.floor((window.innerWidth-200)/this.n_bars)-2,1)// Left offset and margins or just do fraction 
   }
 
+  changeBarWidth(evt){
+    this.n_bars = evt.target.value
+    this.resetArray()
+
+  }
 
   render() {
     const {array} = this.state;
@@ -43,6 +51,8 @@ export default class AlgoViz extends React.Component {
             height: `${value}px`
           }}></div>
         ))}
+        <NavBar whenClicked={this.resetArray}></NavBar>
+        
       </div>
     );
   }
