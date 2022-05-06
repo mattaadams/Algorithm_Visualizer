@@ -1,58 +1,130 @@
-import React from 'react';
-import './AlgoViz.css';
-import NavBar from '../NavBar/NavBar';
-const PRIMARY_COLOR = 'tomato';
+import React from "react";
+import "./AlgoViz.css";
+import NavBar from "../NavBar/NavBar";
+import { getMergeSortAnimations } from "../Algos/Algos.js";
+
+const PRIMARY_COLOR = "turquoise";
+
+// Change this value for the number of bars (value) in the array.
+
+// This is the main color of the array bars.
+
+// This is the color of array bars that are being compared throughout the animations.
+
+const SECONDARY_COLOR = "red";
 
 export default class AlgoViz extends React.Component {
   constructor(props) {
     super(props);
     this.changeBarWidth = this.changeBarWidth.bind(this);
     this.resetArray = this.resetArray.bind(this);
+    this.mergeSort = this.mergeSort.bind(this);
 
-    this.n_bars = 10
+    this.n_bars = 30;
+    this.max_n_bars = 300;
     this.state = {
       array: [],
+      activeIndex: null,
+      running: false,
     };
-
   }
 
   componentDidMount() {
     this.resetArray();
   }
+  handleClick = (index) => this.setState({ activeIndex: index });
 
   resetArray() {
     const array = [];
 
     for (let i = 0; i < this.n_bars; i++) {
-      array.push(randomIntFromInterval(10, window.innerHeight*.9));
+      array.push(randomIntFromInterval(10, window.innerHeight * 0.9));
     }
-    this.setState({array});
-    this.arrayWidth = Math.max(Math.floor((window.innerWidth-200)/this.n_bars)-2,1)// Left offset and margins or just do fraction 
+    this.setState({ array });
+    this.arrayWidth = Math.max(Math.floor((window.innerWidth - 200) / this.n_bars) - 2, 1); // Left offset and margins or just do fraction
+    this.animation_speed = 3 * (this.max_n_bars / this.n_bars); // Slower animation for less bars, replace 300 with max_bar
   }
 
-  changeBarWidth(evt){
-    this.n_bars = evt.target.value
-    this.resetArray()
+  changeBarWidth(evt) {
+    this.n_bars = evt.target.value;
+    this.resetArray();
+  }
 
+  mergeSort() {
+    const animations = getMergeSortAnimations(this.state.array);
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName("array-bar");
+      const isColorChange = i % 3 !== 2;
+      if (isColorChange) {
+        const [barOneIdx, barTwoIdx] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        const color = i % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, i * this.animation_speed);
+      } else {
+        setTimeout(() => {
+          const [barOneIdx, newHeight] = animations[i];
+          const barOneStyle = arrayBars[barOneIdx].style;
+          barOneStyle.height = `${newHeight}px`;
+        }, i * this.animation_speed);
+      }
+    }
+    setTimeout(() => {
+      this.setState({ running: false });
+    }, animations.length * this.animation_speed);
+  }
+  quickSort() {
+    alert("Not implemented yet");
+  }
+
+  heapSort() {
+    alert("Not implemented yet");
+  }
+
+  selectionSort() {
+    alert("Not implemented yet");
+  }
+
+  startSorting(algo) {
+    this.setState({ running: true }, () => {
+      if (algo === "mergeSort") {
+        this.mergeSort();
+      } else if (algo === "quickSort") {
+        this.quickSort();
+      } else if (algo === "heapSort") {
+        this.heapSort();
+      } else if (algo === "selectionSort") {
+        this.selectionSort();
+      }
+    });
   }
 
   render() {
-    const {array} = this.state;
+    const { array } = this.state;
 
     return (
       <div className="array-container">
         {array.map((value, idx) => (
-          <div 
-          className="array-bar" 
-          key={idx}
-          style={{
-            width: `${this.arrayWidth}px`,
-            backgroundColor: PRIMARY_COLOR,
-            height: `${value}px`
-          }}></div>
+          <div
+            className="array-bar"
+            key={idx}
+            style={{
+              width: `${this.arrayWidth}px`,
+              backgroundColor: PRIMARY_COLOR,
+              height: `${value}px`,
+            }}
+          ></div>
         ))}
-        <NavBar whenClicked={this.resetArray}></NavBar>
-        
+        <NavBar
+          whenClickReset={this.resetArray}
+          whenClickStart={(algo) => this.startSorting(algo)}
+          whenScrolled={this.changeBarWidth}
+          arrayMax={this.max_n_bars}
+          running={this.state.running}
+        ></NavBar>
       </div>
     );
   }
