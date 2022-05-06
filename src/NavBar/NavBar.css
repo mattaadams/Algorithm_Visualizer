@@ -6,3 +6,70 @@
   width: 20px
 
 }
+
+
+.new-array-button{
+  border: none;
+  color: white;
+  background-color: rgb(49, 39, 39); 
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+
+}
+
+.disabled-button{
+  border: none;
+  color: rgba(255, 255, 255, 0.271);
+  background-color: rgba(89, 89, 89, 0.645); 
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: not-allowed ;
+
+}
+
+
+.algorithmButton{
+  border: none;
+  color: white;
+  background-color: rgb(49, 39, 39); 
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+
+}
+
+.currentAlgorithmButton{
+  border: none;
+  color: white;
+  background-color: rgb(255, 0, 0); 
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+
+}
+/* .new-array-button:hover{
+  background-color: rgb(56, 239, 23);
+  opacity: 1;
+} */
+
