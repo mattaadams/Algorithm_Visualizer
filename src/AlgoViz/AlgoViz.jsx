@@ -1,16 +1,9 @@
 import React from "react";
 import "./AlgoViz.css";
 import NavBar from "../NavBar/NavBar";
-import { getMergeSortAnimations } from "../Algos/Algos.js";
+import { getMergeSortAnimations } from "../Algos/MergeSort.js";
 
 const PRIMARY_COLOR = "turquoise";
-
-// Change this value for the number of bars (value) in the array.
-
-// This is the main color of the array bars.
-
-// This is the color of array bars that are being compared throughout the animations.
-
 const SECONDARY_COLOR = "red";
 
 export default class AlgoViz extends React.Component {

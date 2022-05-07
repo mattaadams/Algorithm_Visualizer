@@ -36,7 +36,7 @@ export default class NavBar extends React.Component {
       >
         <button
           disabled={this.props.running === true}
-          className={this.props.running === false ? "new-array-button" : "disabled-button"}
+          className={this.props.running === true ? "disabled-button" : "navButton"}
           onClick={whenClickReset}
         >
           New Array
@@ -45,32 +45,32 @@ export default class NavBar extends React.Component {
         <input id="changeSize" disabled={this.props.running === true} type="range" min="10" max={arrayMax} onChange={whenScrolled} />
         <button
           disabled={this.state.activeAlgo === null || this.props.running === true}
-          className={this.state.activeAlgo === null || this.props.running === true ? "disabled-button" : "new-array-button"}
+          className={this.state.activeAlgo === null || this.props.running === true ? "disabled-button" : "navButton"}
           onClick={() => whenClickStart(this.state.activeAlgo)}
         >
           Start Sorting
         </button>
         <button
           id="mergeSort"
-          className={this.state.activeAlgo === "mergeSort" ? "currentAlgorithmButton" : "algorithmButton"}
+          className={this.state.activeAlgo === "mergeSort" ? "currentAlgorithmButton" : "navButton"}
           onClick={() => this.handleClick("mergeSort")}
         >
           Merge Sort
         </button>
         <button
-          className={this.state.activeAlgo === "quickSort" ? "currentAlgorithmButton" : "algorithmButton"}
+          className={this.state.activeAlgo === "quickSort" ? "currentAlgorithmButton" : "navButton"}
           onClick={() => this.handleClick("quickSort")}
         >
           Quick Sort
         </button>
         <button
-          className={this.state.activeAlgo === "heapSort" ? "currentAlgorithmButton" : "algorithmButton"}
+          className={this.state.activeAlgo === "heapSort" ? "currentAlgorithmButton" : "navButton"}
           onClick={() => this.handleClick("heapSort")}
         >
           Heap Sort
         </button>
         <button
-          className={this.state.activeAlgo === "selectionSort" ? "currentAlgorithmButton" : "algorithmButton"}
+          className={this.state.activeAlgo === "selectionSort" ? "currentAlgorithmButton" : "navButton"}
           onClick={() => this.handleClick("selectionSort")}
         >
           Selection Sort
