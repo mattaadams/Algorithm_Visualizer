@@ -4,7 +4,6 @@ import "./NavBar.css";
 // TODO:
 
 // Change style of scroller
-// Disable buttons/scroller while the algo animation is running   (DONE)
 // re-implement mergeSort
 // Implement other 3 sorting algorithms
 // animation speed changes

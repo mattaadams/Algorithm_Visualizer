@@ -1,7 +1,10 @@
+/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "^_" }]*/
+
 import React from "react";
 import "./AlgoViz.css";
 import NavBar from "../NavBar/NavBar";
 import { getMergeSortAnimations } from "../Algos/MergeSort.js";
+import { getSelectionSortAnimations } from "../Algos/SelectionSort.js";
 
 const PRIMARY_COLOR = "turquoise";
 const SECONDARY_COLOR = "red";
@@ -35,7 +38,7 @@ export default class AlgoViz extends React.Component {
     }
     this.setState({ array });
     this.arrayWidth = Math.max(Math.floor((window.innerWidth - 200) / this.n_bars) - 2, 1); // Left offset and margins or just do fraction
-    this.animation_speed = 3 * (this.max_n_bars / this.n_bars); // Slower animation for less bars, replace 300 with max_bar
+    this.animation_speed = 10 * (this.max_n_bars / this.n_bars); // Slower animation for less bars, replace 300 with max_bar
   }
 
   changeBarWidth(evt) {
@@ -78,7 +81,33 @@ export default class AlgoViz extends React.Component {
   }
 
   selectionSort() {
-    alert("Not implemented yet");
+    const animations = getSelectionSortAnimations(this.state.array);
+
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName("array-bar");
+      const isColorChange = animations[i][0];
+      if (isColorChange < 3) {
+        const [_key, barOneIdx, barTwoIdx] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        const color = animations[i][0] === 1 ? SECONDARY_COLOR : PRIMARY_COLOR;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, i * this.animation_speed);
+      } else {
+        setTimeout(() => {
+          const [_key, barOneIdx, newHeight, barTwoIdx, oldHeight] = animations[i];
+          const barOneStyle = arrayBars[barOneIdx].style;
+          const barTwoStyle = arrayBars[barTwoIdx].style;
+          barOneStyle.height = `${newHeight}px`;
+          barTwoStyle.height = `${oldHeight}px`;
+        }, i * this.animation_speed);
+      }
+    }
+    setTimeout(() => {
+      this.setState({ running: false });
+    }, animations.length * this.animation_speed);
   }
 
   startSorting(algo) {
