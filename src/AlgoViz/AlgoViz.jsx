@@ -5,8 +5,10 @@ import "./AlgoViz.css";
 import NavBar from "../NavBar/NavBar";
 import { getMergeSortAnimations } from "../Algos/MergeSort.js";
 import { getSelectionSortAnimations } from "../Algos/SelectionSort.js";
+import { getQuickSortAnimations } from "../Algos/QuickSort.js";
+import { getHeapSortAnimations } from "../Algos/HeapSort.js";
 
-const PRIMARY_COLOR = "turquoise";
+const PRIMARY_COLOR = "aqua";
 const SECONDARY_COLOR = "red";
 
 export default class AlgoViz extends React.Component {
@@ -14,6 +16,8 @@ export default class AlgoViz extends React.Component {
     super(props);
     this.changeBarWidth = this.changeBarWidth.bind(this);
     this.resetArray = this.resetArray.bind(this);
+    this.reverseArray = this.reverseArray.bind(this);
+
     this.mergeSort = this.mergeSort.bind(this);
 
     this.n_bars = 30;
@@ -39,6 +43,11 @@ export default class AlgoViz extends React.Component {
     this.setState({ array });
     this.arrayWidth = Math.max(Math.floor((window.innerWidth - 200) / this.n_bars) - 2, 1); // Left offset and margins or just do fraction
     this.animation_speed = 10 * (this.max_n_bars / this.n_bars); // Slower animation for less bars, replace 300 with max_bar
+  }
+
+  reverseArray() {
+    let reverseArray = this.state.array.reverse();
+    this.setState({ reverseArray });
   }
 
   changeBarWidth(evt) {
@@ -73,15 +82,7 @@ export default class AlgoViz extends React.Component {
     }, animations.length * this.animation_speed);
   }
   quickSort() {
-    alert("Not implemented yet");
-  }
-
-  heapSort() {
-    alert("Not implemented yet");
-  }
-
-  selectionSort() {
-    const animations = getSelectionSortAnimations(this.state.array);
+    const animations = getQuickSortAnimations(this.state.array);
 
     for (let i = 0; i < animations.length; i++) {
       const arrayBars = document.getElementsByClassName("array-bar");
@@ -108,6 +109,66 @@ export default class AlgoViz extends React.Component {
     setTimeout(() => {
       this.setState({ running: false });
     }, animations.length * this.animation_speed);
+  }
+
+  heapSort() {
+    const animations = getHeapSortAnimations(this.state.array);
+
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName("array-bar");
+      const isColorChange = animations[i][0];
+      if (isColorChange < 3) {
+        const [_key, barOneIdx, barTwoIdx] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        const color = animations[i][0] === 1 ? SECONDARY_COLOR : PRIMARY_COLOR;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, i * this.animation_speed);
+      } else {
+        setTimeout(() => {
+          const [_key, barOneIdx, newHeight, barTwoIdx, oldHeight] = animations[i];
+          const barOneStyle = arrayBars[barOneIdx].style;
+          const barTwoStyle = arrayBars[barTwoIdx].style;
+          barOneStyle.height = `${newHeight}px`;
+          barTwoStyle.height = `${oldHeight}px`;
+        }, i * this.animation_speed);
+      }
+    }
+    setTimeout(() => {
+      this.setState({ running: false });
+    }, animations.length * this.animation_speed);
+  }
+
+  selectionSort() {
+    const animations = getSelectionSortAnimations(this.state.array);
+
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName("array-bar");
+      const isColorChange = animations[i][0];
+      if (isColorChange < 3) {
+        const [_key, barOneIdx, barTwoIdx] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        const color = animations[i][0] === 1 ? SECONDARY_COLOR : PRIMARY_COLOR;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, (i * this.animation_speed) / 5);
+      } else {
+        setTimeout(() => {
+          const [_key, barOneIdx, newHeight, barTwoIdx, oldHeight] = animations[i];
+          const barOneStyle = arrayBars[barOneIdx].style;
+          const barTwoStyle = arrayBars[barTwoIdx].style;
+          barOneStyle.height = `${newHeight}px`;
+          barTwoStyle.height = `${oldHeight}px`;
+        }, (i * this.animation_speed) / 5);
+      }
+    }
+    setTimeout(() => {
+      this.setState({ running: false });
+    }, (animations.length * this.animation_speed) / 5);
   }
 
   startSorting(algo) {
@@ -142,6 +203,7 @@ export default class AlgoViz extends React.Component {
         ))}
         <NavBar
           whenClickReset={this.resetArray}
+          whenClickReverse={this.reverseArray}
           whenClickStart={(algo) => this.startSorting(algo)}
           whenScrolled={this.changeBarWidth}
           arrayMax={this.max_n_bars}

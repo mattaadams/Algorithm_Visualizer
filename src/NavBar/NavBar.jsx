@@ -23,7 +23,7 @@ export default class NavBar extends React.Component {
   }
 
   render() {
-    const { whenClickReset, whenScrolled, arrayMax, whenClickStart } = this.props;
+    const { whenClickReset, whenClickReverse, whenScrolled, arrayMax, whenClickStart } = this.props;
 
     return (
       <div
@@ -33,6 +33,13 @@ export default class NavBar extends React.Component {
           height: `50px`,
         }}
       >
+        <button
+          disabled={this.props.running === true}
+          className={this.props.running === true ? "disabled-button" : "navButton"}
+          onClick={whenClickReverse}
+        >
+          Reverse Array
+        </button>
         <button
           disabled={this.props.running === true}
           className={this.props.running === true ? "disabled-button" : "navButton"}

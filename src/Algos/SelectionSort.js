@@ -21,9 +21,9 @@ function doSelection(array, animations) {
 
     if (min !== i) {
       // Swapping the elements if needed
-      let tmp = array[i];
+      let temp = array[i];
       array[i] = array[min];
-      array[min] = tmp;
+      array[min] = temp;
       animations.push([3, min, array[min], i, array[i]]); // index values swapped
     }
   }
