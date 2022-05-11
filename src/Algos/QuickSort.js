@@ -1,7 +1,6 @@
 export function getQuickSortAnimations(array) {
   const animations = [];
   doQuick(array, 0, array.length - 1, animations);
-  console.log(animations);
   return animations;
 }
 
@@ -22,7 +21,6 @@ function partition(array, low, high, animations) {
   // pivot
 
   let pivot = array[high];
-
   // Index of smaller element and
   // indicates the right position
   // of pivot found so far
@@ -36,17 +34,19 @@ function partition(array, low, high, animations) {
       // smaller element
 
       i++;
-      animations.push([1, i, j]);
-      animations.push([2, i, j]);
+
       let temp = array[i];
       array[i] = array[j];
       array[j] = temp;
+      animations.push([4, high], [5, high]);
+      animations.push([1, i, j], [2, i, j]);
       animations.push([3, j, array[j], i, array[i]]);
     }
   }
   let temp = array[i + 1];
   array[i + 1] = array[high];
   array[high] = temp;
+  animations.push([1, i + 1, high], [2, i + 1, high]);
   animations.push([3, high, array[high], i + 1, array[i + 1]]);
 
   return i + 1;

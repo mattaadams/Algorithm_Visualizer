@@ -9,7 +9,9 @@ function doHeap(array, animations) {
   let n = array.length;
 
   // Build heap (rearrange array)
-  for (let i = Math.floor(n / 2) - 1; i >= 0; i--) heapify(array, n, i, animations);
+  for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+    heapify(array, n, i, animations);
+  }
 
   // One by one extract elements from heap
   for (let i = n - 1; i > 0; i--) {
@@ -17,6 +19,7 @@ function doHeap(array, animations) {
     let temp = array[0];
     array[0] = array[i];
     array[i] = temp;
+    animations.push([1, 0, i], [2, 0, i]);
     animations.push([3, i, array[i], 0, array[0]]);
 
     // call max heapify on the reduced heap
@@ -31,14 +34,19 @@ function heapify(array, n, i, animations) {
   let l = 2 * i + 1; // left
   let r = 2 * i + 2; // right
 
-  if (l < n && array[l] > array[largest]) largest = l;
+  if (l < n && array[l] > array[largest]) {
+    largest = l;
+  }
 
-  if (r < n && array[r] > array[largest]) largest = r;
+  if (r < n && array[r] > array[largest]) {
+    largest = r;
+  }
 
   if (largest !== i) {
     let temp = array[i];
     array[i] = array[largest];
     array[largest] = temp;
+    animations.push([1, largest, i], [2, largest, i]);
     animations.push([3, largest, array[largest], i, array[i]]);
 
     // Recursively heapify the affected sub-tree

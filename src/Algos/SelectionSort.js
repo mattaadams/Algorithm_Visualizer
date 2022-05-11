@@ -12,8 +12,7 @@ function doSelection(array, animations) {
     // Finding the smallest number in the subarray
     let min = i;
     for (let j = i + 1; j < n; j++) {
-      animations.push([1, min, j]);
-      animations.push([2, min, j]);
+      animations.push([1, min, j], [2, min, j]);
       if (array[j] < array[min]) {
         min = j;
       }
