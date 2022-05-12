@@ -4,10 +4,7 @@ import "./NavBar.css";
 // TODO:
 
 // Change style of scroller
-// re-implement mergeSort
-// Implement other 3 sorting algorithms
-// animation speed changes
-// animation style change
+// quickSort LL-->LR pointers
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -23,16 +20,10 @@ export default class NavBar extends React.Component {
   }
 
   render() {
-    const { whenClickReset, whenClickReverse, whenScrolled, arrayMax, whenClickStart } = this.props;
+    const { whenClickReset, whenClickReverse, changeSize, changeSpeed, arrayMax, whenClickStart } = this.props;
 
     return (
-      <div
-        className="navbar-container"
-        style={{
-          width: `${window.innerWidth}px`,
-          height: `50px`,
-        }}
-      >
+      <div className="navbar-container">
         <button
           disabled={this.props.running === true}
           className={this.props.running === true ? "disabled-button" : "navButton"}
@@ -47,8 +38,10 @@ export default class NavBar extends React.Component {
         >
           New Array
         </button>
+        Change Sorting Speed --
+        <input class="slider" disabled={this.props.running === true} type="range" min="10" max={arrayMax} onChange={changeSpeed} />
         Change Array Size --
-        <input id="changeSize" disabled={this.props.running === true} type="range" min="10" max={arrayMax} onChange={whenScrolled} />
+        <input class="slider" disabled={this.props.running === true} type="range" min="10" max={arrayMax} onChange={changeSize} />
         <button
           disabled={this.state.activeAlgo === null || this.props.running === true}
           className={this.state.activeAlgo === null || this.props.running === true ? "disabled-button" : "navButton"}

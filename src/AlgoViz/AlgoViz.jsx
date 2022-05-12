@@ -15,11 +15,13 @@ export default class AlgoViz extends React.Component {
   constructor(props) {
     super(props);
     this.changeBarWidth = this.changeBarWidth.bind(this);
+    this.changeSortSpeed = this.changeSortSpeed.bind(this);
     this.resetArray = this.resetArray.bind(this);
     this.reverseArray = this.reverseArray.bind(this);
 
     this.n_bars = 30;
     this.max_n_bars = 300;
+    this.animation_speed = 1;
     this.state = {
       array: [],
       activeIndex: null,
@@ -40,7 +42,6 @@ export default class AlgoViz extends React.Component {
     }
     this.setState({ array });
     this.arrayWidth = Math.max(Math.floor((window.innerWidth - 200) / this.n_bars) - 2, 1); // Left offset and margins or just do fraction
-    this.animation_speed = 5 * (this.max_n_bars / this.n_bars); // Slower animation for less bars, replace 300 with max_bar
   }
 
   reverseArray() {
@@ -51,6 +52,10 @@ export default class AlgoViz extends React.Component {
   changeBarWidth(evt) {
     this.n_bars = evt.target.value;
     this.resetArray();
+  }
+
+  changeSortSpeed(evt) {
+    this.animation_speed = evt.target.value;
   }
 
   runSort(algoAnimation) {
@@ -131,7 +136,8 @@ export default class AlgoViz extends React.Component {
           whenClickReset={this.resetArray}
           whenClickReverse={this.reverseArray}
           whenClickStart={(algo) => this.startSorting(algo)}
-          whenScrolled={this.changeBarWidth}
+          changeSize={this.changeBarWidth}
+          changeSpeed={this.changeSortSpeed}
           arrayMax={this.max_n_bars}
           running={this.state.running}
         ></NavBar>
