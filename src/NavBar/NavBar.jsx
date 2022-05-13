@@ -3,8 +3,7 @@ import "./NavBar.css";
 
 // TODO:
 
-// Change style of scroller
-// quickSort LL-->LR pointers
+// For fun: Add different viszualization
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -38,9 +37,9 @@ export default class NavBar extends React.Component {
         >
           New Array
         </button>
-        Change Sorting Speed --
-        <input class="slider" disabled={this.props.running === true} type="range" min="10" max={arrayMax} onChange={changeSpeed} />
-        Change Array Size --
+        Sorting Speed &rArr;
+        <input class="slider" disabled={this.props.running === true} type="range" min="1" max="10" onChange={changeSpeed} />
+        Array Size &rArr;
         <input class="slider" disabled={this.props.running === true} type="range" min="10" max={arrayMax} onChange={changeSize} />
         <button
           disabled={this.state.activeAlgo === null || this.props.running === true}
