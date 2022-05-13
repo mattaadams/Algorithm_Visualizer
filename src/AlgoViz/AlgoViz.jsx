@@ -1,11 +1,5 @@
 /*eslint no-unused-vars: ["error", { "varsIgnorePattern": "^_" }]*/
 
-// TODO:
-
-// Make visualization code better, and make visualizations better (more color, better transition)
-// color slider
-// better buttons
-
 import React from "react";
 import "./AlgoViz.css";
 import NavBar from "../NavBar/NavBar";
@@ -27,7 +21,6 @@ export default class AlgoViz extends React.Component {
 
     this.n_bars = 30;
     this.max_n_bars = 300;
-    this.max_speed = 500;
     this.animation_speed = 1;
     this.state = {
       array: [],
@@ -62,7 +55,7 @@ export default class AlgoViz extends React.Component {
   }
 
   changeSortSpeed(evt) {
-    this.animation_speed = 1 + this.max_speed - evt.target.value * 50;
+    this.animation_speed = evt.target.value;
   }
 
   runSort(algoAnimation) {
@@ -91,17 +84,6 @@ export default class AlgoViz extends React.Component {
           const [_key, barOneIdx, newHeight] = animations[i];
           const barOneStyle = arrayBars[barOneIdx].style;
           barOneStyle.height = `${newHeight}px`;
-        }, i * this.animation_speed);
-      } else if (isColorChange >= 7) {
-        setTimeout(() => {
-          const [_key, barOneIdx, barTwoIdx, barThreeIdx] = animations[i];
-          const barOneStyle = arrayBars[barOneIdx].style;
-          const barTwoStyle = arrayBars[barTwoIdx].style;
-          const barThreeStyle = arrayBars[barThreeIdx].style;
-          const color = animations[i][0] === 7 ? SECONDARY_COLOR : PRIMARY_COLOR;
-          barOneStyle.backgroundColor = color;
-          barTwoStyle.backgroundColor = color;
-          barThreeStyle.backgroundColor = color;
         }, i * this.animation_speed);
       } else {
         setTimeout(() => {
@@ -157,7 +139,6 @@ export default class AlgoViz extends React.Component {
           changeSize={this.changeBarWidth}
           changeSpeed={this.changeSortSpeed}
           arrayMax={this.max_n_bars}
-          speedMax={this.max_speed}
           running={this.state.running}
         ></NavBar>
       </div>

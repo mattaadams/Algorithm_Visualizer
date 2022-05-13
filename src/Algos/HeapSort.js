@@ -46,7 +46,7 @@ function heapify(array, n, i, animations) {
     let temp = array[i];
     array[i] = array[largest];
     array[largest] = temp;
-    animations.push([7, l, r, i], [8, l, r, i]);
+    animations.push([1, largest, i], [2, largest, i]);
     animations.push([3, largest, array[largest], i, array[i]]);
 
     // Recursively heapify the affected sub-tree
