@@ -86,12 +86,12 @@
   cursor: pointer;
 }
 
-.homeButton{
-  position: fixed;
+.homepage_Button{
+  position:fixed;
+  left:50px;
   border: none;
   color: white;
-  left: 50px;
-  background-color: rgb(117, 69, 5); 
+  background-color: rgb(4, 209, 255); 
   padding: 12px 24px;
   text-align: center;
   text-decoration: none;
@@ -100,5 +100,4 @@
   margin: 4px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
-
 }

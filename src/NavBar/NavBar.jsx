@@ -1,11 +1,6 @@
 import React from "react";
 import "./NavBar.css";
 
-// TODO:
-
-// Change style of scroller
-// quickSort LL-->LR pointers
-
 export default class NavBar extends React.Component {
   constructor(props) {
     super(props);
@@ -24,8 +19,8 @@ export default class NavBar extends React.Component {
 
     return (
       <div className="navbar-container">
-        <a href="https://mattaadams.github.io/">
-          <button className="homeButton">My Website</button>
+        <a href="https://mattaadams.github.io">
+          <button className="homepage_Button">Back to Website</button>
         </a>
         <button
           disabled={this.props.running === true}
@@ -41,9 +36,9 @@ export default class NavBar extends React.Component {
         >
           New Array
         </button>
-        Change Sorting Speed --
-        <input class="slider" disabled={this.props.running === true} type="range" min="10" max={arrayMax} onChange={changeSpeed} />
-        Change Array Size --
+        Sorting Speed &rArr;
+        <input class="slider" disabled={this.props.running === true} type="range" min="1" max="10" onChange={changeSpeed} />
+        Array Size &rArr;
         <input class="slider" disabled={this.props.running === true} type="range" min="10" max={arrayMax} onChange={changeSize} />
         <button
           disabled={this.state.activeAlgo === null || this.props.running === true}
