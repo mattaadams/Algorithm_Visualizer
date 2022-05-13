@@ -3,7 +3,8 @@ import "./NavBar.css";
 
 // TODO:
 
-// For fun: Add different viszualization
+// Change style of scroller
+// quickSort LL-->LR pointers
 
 export default class NavBar extends React.Component {
   constructor(props) {
