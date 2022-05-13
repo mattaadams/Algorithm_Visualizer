@@ -1,6 +1,10 @@
 import React from "react";
 import "./NavBar.css";
 
+// TODO:
+
+// For fun: Add different viszualization
+
 export default class NavBar extends React.Component {
   constructor(props) {
     super(props);
@@ -19,9 +23,6 @@ export default class NavBar extends React.Component {
 
     return (
       <div className="navbar-container">
-        <a href="https://mattaadams.github.io">
-          <button className="homepage_Button">Back to Website</button>
-        </a>
         <button
           disabled={this.props.running === true}
           className={this.props.running === true ? "disabled-button" : "navButton"}
