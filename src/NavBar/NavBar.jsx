@@ -23,6 +23,9 @@ export default class NavBar extends React.Component {
 
     return (
       <div className="navbar-container">
+        <a href="https://mattaadams.github.io/">
+          <button className="homeButton">My Website</button>
+        </a>
         <button
           disabled={this.props.running === true}
           className={this.props.running === true ? "disabled-button" : "navButton"}
