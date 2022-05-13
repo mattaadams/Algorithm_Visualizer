@@ -85,3 +85,19 @@
   background: #04AA6D;
   cursor: pointer;
 }
+
+.homepage_Button{
+  position:fixed;
+  left:50px;
+  border: none;
+  color: white;
+  background-color: rgb(4, 209, 255); 
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
