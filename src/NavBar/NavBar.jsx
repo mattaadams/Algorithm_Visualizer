@@ -37,9 +37,25 @@ export default class NavBar extends React.Component {
           New Array
         </button>
         Sorting Speed &rArr;
-        <input class="slider" disabled={this.props.running === true} type="range" min="1" max="10" onChange={changeSpeed} />
+        <input
+          className={this.props.running === true ? "sliderOff" : "slider"}
+          disabled={this.props.running === true}
+          type="range"
+          min="1"
+          max="20"
+          defaultValue="10"
+          onChange={changeSpeed}
+        />
         Array Size &rArr;
-        <input class="slider" disabled={this.props.running === true} type="range" min="10" max={arrayMax} onChange={changeSize} />
+        <input
+          className={this.props.running === true ? "sliderOff" : "slider"}
+          disabled={this.props.running === true}
+          type="range"
+          min="10"
+          defaultValue="100"
+          max={arrayMax}
+          onChange={changeSize}
+        />
         <button
           disabled={this.state.activeAlgo === null || this.props.running === true}
           className={this.state.activeAlgo === null || this.props.running === true ? "disabled-button" : "navButton"}

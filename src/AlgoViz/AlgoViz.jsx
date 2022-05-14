@@ -26,9 +26,9 @@ export default class AlgoViz extends React.Component {
     this.resetArray = this.resetArray.bind(this);
     this.reverseArray = this.reverseArray.bind(this);
 
-    this.n_bars = 30;
+    this.n_bars = 100;
     this.max_n_bars = 300;
-    this.max_speed = 500;
+    this.max_delay = 500;
     this.animation_speed = 1;
     this.state = {
       array: [],
@@ -63,7 +63,7 @@ export default class AlgoViz extends React.Component {
   }
 
   changeSortSpeed(evt) {
-    this.animation_speed = 1 + this.max_speed - evt.target.value * 50;
+    this.animation_speed = 1 + this.max_delay - evt.target.value * 25;
   }
 
   runSort(algoAnimation) {
