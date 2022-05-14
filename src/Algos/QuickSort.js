@@ -13,7 +13,7 @@ function doQuick(array, start, end, animations) {
   let pivot = start,
     i = start + 1,
     j = end;
-  animations.push([4, pivot]);
+  animations.push([0, pivot, pivot]);
   while (j >= i) {
     if (array[j] < array[pivot] && array[i] > array[pivot]) {
       let temp = array[j];
@@ -39,7 +39,7 @@ function doQuick(array, start, end, animations) {
     array[pivot] = temp;
     animations.push([3, pivot, array[pivot], j, array[j]]);
   }
-  animations.push([5, pivot]);
+  animations.push([2, pivot, pivot]);
   doQuick(array, start, j - 1, animations);
   doQuick(array, j + 1, end, animations);
 }

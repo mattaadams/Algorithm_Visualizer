@@ -46,10 +46,12 @@ function heapify(array, n, i, animations) {
     let temp = array[i];
     array[i] = array[largest];
     array[largest] = temp;
-    animations.push([7, l, r, i], [8, l, r, i]);
+    animations.push([7, l, r, i], [1, i, largest]);
     animations.push([3, largest, array[largest], i, array[i]]);
+    animations.push([8, l, r, i]);
 
     // Recursively heapify the affected sub-tree
     heapify(array, n, largest, animations);
   }
+  animations.push([2, largest, i]);
 }

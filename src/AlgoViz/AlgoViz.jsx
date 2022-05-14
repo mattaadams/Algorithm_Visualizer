@@ -14,9 +14,10 @@ import { getSelectionSortAnimations } from "../Algos/SelectionSort.js";
 import { getQuickSortAnimations } from "../Algos/QuickSort.js";
 import { getHeapSortAnimations } from "../Algos/HeapSort.js";
 
-const PRIMARY_COLOR = "aqua";
+const PRIMARY_COLOR = "rgb(4, 209, 255)";
 const SECONDARY_COLOR = "tomato";
-const TERTIARY_COLOR = "yellow";
+const TERTIARY_COLOR = "violet";
+const QUATERNARY_COLOR = "#66FF00";
 export default class AlgoViz extends React.Component {
   constructor(props) {
     super(props);
@@ -75,16 +76,9 @@ export default class AlgoViz extends React.Component {
           const [_key, barOneIdx, barTwoIdx] = animations[i];
           const barOneStyle = arrayBars[barOneIdx].style;
           const barTwoStyle = arrayBars[barTwoIdx].style;
-          const color = animations[i][0] === 1 ? SECONDARY_COLOR : PRIMARY_COLOR;
+          const color = animations[i][0] === 1 ? SECONDARY_COLOR : animations[i][0] === 0 ? TERTIARY_COLOR : PRIMARY_COLOR;
           barOneStyle.backgroundColor = color;
           barTwoStyle.backgroundColor = color;
-        }, i * this.animation_speed);
-      } else if (isColorChange >= 4 && isColorChange < 6) {
-        setTimeout(() => {
-          const [_key, barOneIdx] = animations[i];
-          const barOneStyle = arrayBars[barOneIdx].style;
-          const color = animations[i][0] === 4 ? TERTIARY_COLOR : PRIMARY_COLOR;
-          barOneStyle.backgroundColor = color;
         }, i * this.animation_speed);
       } else if (isColorChange === 6) {
         setTimeout(() => {
@@ -98,7 +92,7 @@ export default class AlgoViz extends React.Component {
           const barOneStyle = arrayBars[barOneIdx].style;
           const barTwoStyle = arrayBars[barTwoIdx].style;
           const barThreeStyle = arrayBars[barThreeIdx].style;
-          const color = animations[i][0] === 7 ? SECONDARY_COLOR : PRIMARY_COLOR;
+          const color = animations[i][0] === 7 ? QUATERNARY_COLOR : PRIMARY_COLOR;
           barOneStyle.backgroundColor = color;
           barTwoStyle.backgroundColor = color;
           barThreeStyle.backgroundColor = color;
